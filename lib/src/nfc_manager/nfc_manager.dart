@@ -25,9 +25,17 @@ class NfcManager {
   // _onError
   NfcErrorCallback? _onError;
 
+  Future<bool> hasHWSupport() async {
+    return channel.invokeMethod('Nfc#hasHWSupport').then((value) => value);
+  }
+
   /// Checks whether the NFC features are available.
   Future<bool> isAvailable() async {
     return channel.invokeMethod('Nfc#isAvailable').then((value) => value!);
+  }
+
+  Future<bool> showSettingsPopup() async {
+    return channel.invokeMethod('Nfc#showSettingsPopup').then((value) => value);
   }
 
   /// Start the session and register callbacks for tag discovery.

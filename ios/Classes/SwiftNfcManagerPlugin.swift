@@ -27,6 +27,7 @@ public class SwiftNfcManagerPlugin: NSObject, FlutterPlugin {
     }
 
     switch call.method {
+    case "Nfc#hasHWSupport": handleNfcHasHWSupport(call.arguments, result: result)
     case "Nfc#isAvailable": handleNfcIsAvailable(call.arguments, result: result)
     case "Nfc#startSession": handleNfcStartSession(call.arguments as! [String : Any?], result: result)
     case "Nfc#stopSession": handleNfcStopSession(call.arguments as! [String : Any?], result: result)
@@ -70,6 +71,12 @@ public class SwiftNfcManagerPlugin: NSObject, FlutterPlugin {
     case "MiFare#sendMiFareIso7816CommandRaw": handleMiFareSendMiFareIso7816CommandRaw(call.arguments as! [String : Any?], result: result)
     default: result(FlutterMethodNotImplemented)
     }
+  }
+
+  @available(iOS 13.0, *)
+  private func handleNfcHasHWSupport(_ arguments: Any?, result: @escaping FlutterResult) {
+    // FIXME
+    result(NFCTagReaderSession.readingAvailable)
   }
 
   @available(iOS 13.0, *)
